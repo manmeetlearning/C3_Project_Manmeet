@@ -5,11 +5,13 @@ import org.mockito.Mockito;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class RestaurantTest {
     Restaurant restaurant;
+    List<String> selectedItemNames;
     //REFACTOR ALL THE REPEATED LINES OF CODE
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>OPEN/CLOSED<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -77,16 +79,23 @@ class RestaurantTest {
 
     @Test
     public void restaurant_menu_order_value_for_multiple_items_should_match_sum_of_item_values(){
-        long sumValue_Expected = -1;
+        long sumValue_Expected = 30;
 
         restaurant = this.getRestaurantTestObject();
+        restaurant.addToMenu("Item1", 10);
+        restaurant.addToMenu("Item2", 20);
+        restaurant.addToMenu("Item3", 30);
+        restaurant.addToMenu("Item4", 40);
+        selectedItemNames = new ArrayList<String>();
+        selectedItemNames.add("Item1");
+        selectedItemNames.add("Item2");
 
-        Assertions.assertEquals(sumValue_Expected, restaurant.getOrderValue(new ArrayList<String>()));
+        Assertions.assertEquals(sumValue_Expected, restaurant.getOrderValue(selectedItemNames));
     }
 
     @Test
     public void restaurant_menu_order_value_for_zero_item_should_be_zero(){
-        long sumValue_Expected = -1;
+        long sumValue_Expected = 0;
         restaurant = this.getRestaurantTestObject();
         Assertions.assertEquals(sumValue_Expected, restaurant.getOrderValue(new ArrayList<String>()));
     }

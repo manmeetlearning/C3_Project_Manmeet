@@ -63,4 +63,9 @@ public class Restaurant {
         return name;
     }
 
+    public long getOrderValue(List<String> selectedItems) {
+        long sumValue = 0;
+
+        return sumValue;
+    }
 }
